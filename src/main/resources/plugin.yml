@@ -1,0 +1,9 @@
+name: BuildTraining
+version: '${version}'
+main: org.example.da.buildtraining.BuildTraining
+api-version: 1.12.2
+authors: [kasperml]
+commands:
+  finish:
+    usage: "/finish <10-100>"
+    description: "Новое растояние"

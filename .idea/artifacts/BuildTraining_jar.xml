@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BuildTraining:jar">
+    <output-path>$USER_HOME$/Desktop/serv/plugins</output-path>
+    <root id="archive" name="BuildTraining.jar">
+      <element id="module-output" name="BuildTraining.main" />
+      <element id="module-source" name="BuildTraining.main" />
+      <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.8.9" />
+    </root>
+  </artifact>
+</component>
