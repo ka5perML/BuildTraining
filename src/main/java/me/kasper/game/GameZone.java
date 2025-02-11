@@ -1,10 +1,10 @@
-package org.example.da.buildtraining.game;
+package me.kasper.game;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.example.da.buildtraining.BuildTraining;
-import org.example.da.buildtraining.map.MapManager;
+import me.kasper.BuildTraining;
+import me.kasper.map.MapManager;
 
 public class GameZone {
     private final double ZX = 4;
@@ -19,7 +19,7 @@ public class GameZone {
         this.manager = manager;
         Bukkit.getScheduler().runTaskTimer(BuildTraining.getInstance(), () -> {
             checkPlayerZone();
-        },0,20);
+        },0,10);
     }
 
     private void checkPlayerZone(){

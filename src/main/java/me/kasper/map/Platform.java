@@ -1,4 +1,4 @@
-package org.example.da.buildtraining.map;
+package me.kasper.map;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

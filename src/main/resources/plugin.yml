@@ -1,6 +1,6 @@
 name: BuildTraining
-version: '${version}'
-main: org.example.da.buildtraining.BuildTraining
+version: 1.0
+main: me.kasper.BuildTraining
 api-version: 1.12.2
 authors: [kasperml]
 commands:

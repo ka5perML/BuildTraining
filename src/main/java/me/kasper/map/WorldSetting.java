@@ -1,8 +1,8 @@
-package org.example.da.buildtraining.map;
+package me.kasper.map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.example.da.buildtraining.BuildTraining;
+import me.kasper.BuildTraining;
 
 public class WorldSetting {
     public void startWorldSetting(){

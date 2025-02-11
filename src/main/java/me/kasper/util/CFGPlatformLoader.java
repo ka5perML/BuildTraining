@@ -1,9 +1,9 @@
-package org.example.da.buildtraining.util;
+package me.kasper.util;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.SneakyThrows;
-import org.example.da.buildtraining.map.Platform;
+import me.kasper.map.Platform;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;

@@ -1,9 +1,9 @@
-package org.example.da.buildtraining.game;
+package me.kasper.game;
 
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.example.da.buildtraining.map.MapManager;
+import me.kasper.map.MapManager;
 
 public class GameManager {
     @Getter

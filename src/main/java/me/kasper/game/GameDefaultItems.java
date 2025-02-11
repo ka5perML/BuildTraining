@@ -1,4 +1,4 @@
-package org.example.da.buildtraining.game;
+package me.kasper.game;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

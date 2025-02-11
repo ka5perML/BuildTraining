@@ -5,6 +5,7 @@
       <element id="module-output" name="BuildTraining.main" />
       <element id="module-source" name="BuildTraining.main" />
       <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.8.9" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/cfgPlatform.json" />
     </root>
   </artifact>
 </component>

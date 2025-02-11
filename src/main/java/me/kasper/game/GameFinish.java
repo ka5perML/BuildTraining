@@ -1,4 +1,4 @@
-package org.example.da.buildtraining.game;
+package me.kasper.game;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -6,8 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.example.da.buildtraining.BuildTraining;
-import org.example.da.buildtraining.map.MapManager;
+import me.kasper.BuildTraining;
+import me.kasper.map.MapManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class GameFinish{
 
     private void checkFinish(){
         manager.getPlayerMap().forEach((player, cord) -> {
-            if (player.getLocation().getBlockZ() >= (cord.clone().getBlockZ() + playerFinishMAP.get(player))){
+            if (cord != null && player.getLocation().getBlockZ() >= (cord.clone().getBlockZ() + playerFinishMAP.get(player))){
                 gameManager.teleportPlayer(player);
             }
         });
@@ -64,6 +64,7 @@ public class GameFinish{
         }
     }
 
+    @SneakyThrows
     private void destroyFinish(Player player){
         try {
             Location location = manager.getPlayerMap().get(player);

@@ -1,14 +1,14 @@
-package org.example.da.buildtraining.game;
+package me.kasper.game;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.bukkit.Bukkit;
+import me.kasper.BuildTraining;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.example.da.buildtraining.BuildTraining;
+
 
 import java.util.HashMap;
 import java.util.List;

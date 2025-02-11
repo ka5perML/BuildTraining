@@ -1,10 +1,10 @@
-package org.example.da.buildtraining.timer;
+package me.kasper.timer;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.example.da.buildtraining.BuildTraining;
+import me.kasper.BuildTraining;
 
 import java.util.Locale;
 
@@ -37,7 +37,7 @@ public class Timer {
         running = false;
         Bukkit.getScheduler().cancelTask(taskID);
         long elapsed = System.currentTimeMillis() - startTime;
-        double seconds = elapsed / 1000.0;
+        double seconds = elapsed / 1000.0 - 0.05;
         player.sendMessage("§a§lВремя: §e" + String.format("%.2f", seconds) + " сек.");
     }
 }

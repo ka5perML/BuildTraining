@@ -1,10 +1,10 @@
-package org.example.da.buildtraining.timer;
+package me.kasper.timer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.example.da.buildtraining.BuildTraining;
-import org.example.da.buildtraining.game.GameManager;
-import org.example.da.buildtraining.map.MapManager;
+import me.kasper.BuildTraining;
+import me.kasper.game.GameManager;
+import me.kasper.map.MapManager;
 
 import java.util.HashMap;
 import java.util.Map;

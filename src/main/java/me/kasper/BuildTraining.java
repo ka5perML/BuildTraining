@@ -1,14 +1,21 @@
-package org.example.da.buildtraining;
+package me.kasper;
 
+import lombok.SneakyThrows;
+import me.kasper.map.Platform;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.example.da.buildtraining.game.GameManager;
-import org.example.da.buildtraining.game.command.CustomFinish;
-import org.example.da.buildtraining.game.listener.PlayerRegistnerListener;
-import org.example.da.buildtraining.map.MapManager;
-import org.example.da.buildtraining.timer.TimerManager;
-import org.example.da.buildtraining.util.CFGPlatformLoader;
+import me.kasper.game.GameManager;
+import me.kasper.game.command.CustomFinish;
+import me.kasper.game.listener.PlayerRegistnerListener;
+import me.kasper.map.MapManager;
+import me.kasper.timer.TimerManager;
+import me.kasper.util.CFGPlatformLoader;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class BuildTraining extends JavaPlugin {
     private static BuildTraining instance;
@@ -16,13 +23,16 @@ public final class BuildTraining extends JavaPlugin {
     private MapManager mapManager;
     private GameManager gameManager;
     private TimerManager timerManager;
+    private List<Platform> platformList;
 
+    @SneakyThrows
     @Override
     public void onEnable() {
         instance = this;
-
         loader = new CFGPlatformLoader();
-        mapManager = new MapManager(loader.loadPlatformCFG(getClass().getClassLoader().getResourceAsStream("cfgPlatform.json")));
+
+        platformList = loader.loadPlatformCFG(BuildTraining.getInstance().getResource("cfgPlatform.json"));
+        mapManager = new MapManager(platformList);
         gameManager = new GameManager(mapManager);
         timerManager = new TimerManager(mapManager, gameManager);
         mapManager.getWorldSetting().startWorldSetting();

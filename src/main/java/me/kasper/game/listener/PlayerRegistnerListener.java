@@ -1,4 +1,4 @@
-package org.example.da.buildtraining.game.listener;
+package me.kasper.game.listener;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -8,7 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.example.da.buildtraining.game.GameManager;
+import me.kasper.game.GameManager;
 
 import java.util.ArrayList;
 
