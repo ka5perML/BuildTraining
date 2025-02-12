@@ -5,6 +5,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import me.kasper.map.MapManager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GameManager {
     @Getter
     private final MapManager mapManager;
@@ -16,11 +19,13 @@ public class GameManager {
     private GameBuild gameBuild;
     @Getter
     private GameDefaultItems defaultItems;
+    @Getter
+    private Map<Player, Double> playerFinishMAP = new HashMap<>();
 
     public GameManager(MapManager mapManager) {
         this.mapManager = mapManager;
-        this.gameFinish = new GameFinish(mapManager, this);
         this.gameZone = new GameZone(mapManager, this);
+        this.gameFinish = new GameFinish(mapManager, this);
         this.gameBuild = new GameBuild();
         this.defaultItems = new GameDefaultItems();
     }

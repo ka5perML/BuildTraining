@@ -1,7 +1,7 @@
 package me.kasper.game;
 
-import lombok.Getter;
 import lombok.SneakyThrows;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,14 +9,10 @@ import org.bukkit.entity.Player;
 import me.kasper.BuildTraining;
 import me.kasper.map.MapManager;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class GameFinish{
     private final MapManager manager;
     private final GameManager gameManager;
-    @Getter
-    private Map<Player, Double> playerFinishMAP = new HashMap<>();
 
     public GameFinish(MapManager manager, GameManager gameManager) {
         this.manager = manager;
@@ -28,26 +24,26 @@ public class GameFinish{
 
     private void checkFinish(){
         manager.getPlayerMap().forEach((player, cord) -> {
-            if (cord != null && player.getLocation().getBlockZ() >= (cord.clone().getBlockZ() + playerFinishMAP.get(player))){
+            if (cord != null && player.getLocation().getBlockZ() >= (cord.clone().getBlockZ() + gameManager.getPlayerFinishMAP().get(player))){
                 gameManager.teleportPlayer(player);
             }
         });
     }
 
     public void addDefaultPlayerFinish(Player player){
-        playerFinishMAP.putIfAbsent(player, 23.0);
+        gameManager.getPlayerFinishMAP().putIfAbsent(player, 23.0);
         buildFinish(player);
     }
 
     public void addCustomPlayerFinish(Player player, double distance){
         destroyFinish(player);
-        playerFinishMAP.put(player, (distance + 3));
+        gameManager.getPlayerFinishMAP().put(player, (distance + 3));
         buildFinish(player);
     }
 
     public void removePlayer(Player player){
         destroyFinish(player);
-        playerFinishMAP.remove(player);
+        gameManager.getPlayerFinishMAP().remove(player);
     }
 
     @SneakyThrows
@@ -58,7 +54,7 @@ public class GameFinish{
                     location.getWorld(),
                     location.getX() + dz - 2,
                     location.getY(),
-                    location.getZ() + playerFinishMAP.get(player)
+                    location.getZ() + gameManager.getPlayerFinishMAP().get(player)
             );
             location.getWorld().getBlockAt(blockLocation).setType(Material.GOLD_BLOCK);
         }
@@ -73,7 +69,7 @@ public class GameFinish{
                         location.getWorld(),
                         location.getX() + dz - 2,
                         location.getY(),
-                        location.getZ() + playerFinishMAP.get(player)
+                        location.getZ() + gameManager.getPlayerFinishMAP().get(player)
                 );
                 location.getWorld().getBlockAt(blockLocation).setType(Material.AIR);
             }

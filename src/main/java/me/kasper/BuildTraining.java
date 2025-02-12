@@ -12,9 +12,6 @@ import me.kasper.map.MapManager;
 import me.kasper.timer.TimerManager;
 import me.kasper.util.CFGPlatformLoader;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 public final class BuildTraining extends JavaPlugin {

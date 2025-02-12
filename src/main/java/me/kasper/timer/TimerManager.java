@@ -1,5 +1,6 @@
 package me.kasper.timer;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import me.kasper.BuildTraining;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TimerManager {
+    @Getter
     private final Map<Player, Timer> watches = new HashMap<>();
     private final MapManager manager;
     private Timer timer;
@@ -26,12 +28,13 @@ public class TimerManager {
         },0,1);
     }
 
-    public void checkPlayer(Player player) {
+    private void checkPlayer(Player player) {
         timer = new Timer(player);
         watches.putIfAbsent(player, timer);
         if (!gameManager.getGameZone().isGameZone(player)){
             watches.get(player).startTimer();
-        }else
+        }else{
             watches.get(player).stopTimer();
+        }
     }
 }

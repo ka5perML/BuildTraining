@@ -1,5 +1,6 @@
 package me.kasper.timer;
 
+import lombok.Getter;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -13,6 +14,8 @@ public class Timer {
     private boolean running = false;
     private int taskID;
     private final Player player;
+    @Getter
+    private double record = 0;
 
     public Timer(Player player) {
         this.player = player;
@@ -38,6 +41,7 @@ public class Timer {
         Bukkit.getScheduler().cancelTask(taskID);
         long elapsed = System.currentTimeMillis() - startTime;
         double seconds = elapsed / 1000.0 - 0.05;
+        record = seconds;
         player.sendMessage("§a§lВремя: §e" + String.format("%.2f", seconds) + " сек.");
     }
 }
