@@ -1,5 +1,8 @@
 package me.kasper.game.listener;
 
+import me.kasper.profile.Profile;
+import me.kasper.profile.ProfileManager;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,15 +17,17 @@ import java.util.ArrayList;
 
 public class PlayerRegistnerListener implements Listener {
     private final GameManager gameManager;
-
-    public PlayerRegistnerListener(GameManager gamaManager) {
+    private final ProfileManager profileManager;
+    public PlayerRegistnerListener(GameManager gamaManager, ProfileManager profileManager) {
         this.gameManager = gamaManager;
+        this.profileManager = profileManager;
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
 
+        profileManager.addProfile(player, new Profile(player.getDisplayName(), new ArrayList<>()));
         gameManager.getMapManager().start(player);
         gameManager.teleportPlayer(player);
         gameManager.getGameFinish().addDefaultPlayerFinish(player);
@@ -32,6 +37,8 @@ public class PlayerRegistnerListener implements Listener {
     @EventHandler
     public void onPlayerQuiet(PlayerQuitEvent e){
         Player player = e.getPlayer();
+
+        profileManager.removeProfile(player);
         gameManager.getGameFinish().removePlayer(player);
         gameManager.getMapManager().end(player);
         e.setQuitMessage("");
@@ -40,9 +47,7 @@ public class PlayerRegistnerListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
         Player player = e.getPlayer();
-        if(gameManager.getGameZone().isGameZone(player)){
-            e.setCancelled(true);
-        }
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) e.setCancelled(true);
     }
 
     @EventHandler
@@ -50,7 +55,7 @@ public class PlayerRegistnerListener implements Listener {
         Player player = e.getPlayer();
         Location blockLocation = e.getBlockPlaced().getLocation();
 
-        if(gameManager.getGameZone().isGameZone(player)){
+        if(gameManager.getGameZone().isPlayZone(player)){
             e.setCancelled(true);
             return;
         }

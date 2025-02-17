@@ -15,7 +15,8 @@ public class Timer {
     private int taskID;
     private final Player player;
     @Getter
-    private double record = 0;
+    private double finalTime;
+
 
     public Timer(Player player) {
         this.player = player;
@@ -41,7 +42,7 @@ public class Timer {
         Bukkit.getScheduler().cancelTask(taskID);
         long elapsed = System.currentTimeMillis() - startTime;
         double seconds = elapsed / 1000.0 - 0.05;
-        record = seconds;
+        finalTime = seconds;
         player.sendMessage("§a§lВремя: §e" + String.format("%.2f", seconds) + " сек.");
     }
 }

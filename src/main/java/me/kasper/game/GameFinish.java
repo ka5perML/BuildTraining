@@ -2,6 +2,8 @@ package me.kasper.game;
 
 import lombok.SneakyThrows;
 
+import me.kasper.profile.ProfileManager;
+import me.kasper.timer.TimerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,19 +15,33 @@ import me.kasper.map.MapManager;
 public class GameFinish{
     private final MapManager manager;
     private final GameManager gameManager;
+    private final ProfileManager profileManager;
 
-    public GameFinish(MapManager manager, GameManager gameManager) {
+    public GameFinish(MapManager manager, GameManager gameManager, ProfileManager profileManager) {
         this.manager = manager;
         this.gameManager = gameManager;
+        this.profileManager = profileManager;
         Bukkit.getScheduler().runTaskTimer(BuildTraining.getInstance(), () -> {
             checkFinish();
-        },0,20);
+        },0,10);
     }
 
     private void checkFinish(){
         manager.getPlayerMap().forEach((player, cord) -> {
-            if (cord != null && player.getLocation().getBlockZ() >= (cord.clone().getBlockZ() + gameManager.getPlayerFinishMAP().get(player))){
+            if (cord != null && player.getLocation().getBlockZ() >= (cord.getBlockZ() + gameManager.getPlayerFinishMAP().get(player))){
                 gameManager.teleportPlayer(player);
+                 Bukkit.getScheduler().runTaskAsynchronously(BuildTraining.getInstance(), () -> {
+                    try {
+                        Thread.sleep(1000);
+                        double finalTime = TimerManager
+                            .getWatches()
+                            .get(player)
+                            .getFinalTime();
+                        profileManager.updateProfile(player, finalTime);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                });
             }
         });
     }

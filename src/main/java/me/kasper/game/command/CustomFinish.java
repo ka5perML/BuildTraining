@@ -1,5 +1,6 @@
 package me.kasper.game.command;
 
+import me.kasper.profile.ProfileManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,9 +9,11 @@ import me.kasper.game.GameManager;
 
 public class CustomFinish implements CommandExecutor {
     private final GameManager gameManager;
+    private final ProfileManager profileManager;
 
-    public CustomFinish(GameManager gameManager) {
+    public CustomFinish(GameManager gameManager, ProfileManager profileManager) {
         this.gameManager = gameManager;
+        this.profileManager = profileManager;
     }
 
 
@@ -26,6 +29,7 @@ public class CustomFinish implements CommandExecutor {
             if (distance >= 10.0 && distance <= 100.0) {
                 gameManager.getGameFinish().addCustomPlayerFinish(player, distance);
                 player.sendMessage("Вы успешно изменили дистанцию финиша на " + (int) distance);
+                profileManager.reloadProfile(player);
                 return true;
             }
         }

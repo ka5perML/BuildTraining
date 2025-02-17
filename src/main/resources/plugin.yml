@@ -7,3 +7,6 @@ commands:
   finish:
     usage: "/finish <10-100>"
     description: "Новое растояние"
+  record:
+    usage: "/record"
+    description: "Лучшее время"

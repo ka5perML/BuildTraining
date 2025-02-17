@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class TimerManager {
     @Getter
-    private final Map<Player, Timer> watches = new HashMap<>();
+    private static final Map<Player, Timer> watches = new HashMap<>();
     private final MapManager manager;
     private Timer timer;
     private final GameManager gameManager;
@@ -31,7 +31,7 @@ public class TimerManager {
     private void checkPlayer(Player player) {
         timer = new Timer(player);
         watches.putIfAbsent(player, timer);
-        if (!gameManager.getGameZone().isGameZone(player)){
+        if (!gameManager.getGameZone().isPlayZone(player)){
             watches.get(player).startTimer();
         }else{
             watches.get(player).stopTimer();

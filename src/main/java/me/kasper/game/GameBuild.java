@@ -21,6 +21,7 @@ public class GameBuild {
     @SneakyThrows
     public void removeBlocks(Player player) {
         List<Location> blocks = playerBlockMap.get(player);
+        playerBlockMap.remove(player);
         if (blocks == null || blocks.isEmpty()) return;
 
         new BukkitRunnable() {
@@ -29,7 +30,6 @@ public class GameBuild {
             @Override
             public void run() {
                 if (index >= blocks.size()) {
-                    playerBlockMap.remove(player);
                     cancel();
                     return;
                 }

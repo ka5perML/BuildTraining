@@ -1,6 +1,7 @@
 package me.kasper.game;
 
 import lombok.Getter;
+import me.kasper.profile.ProfileManager;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import me.kasper.map.MapManager;
@@ -22,10 +23,10 @@ public class GameManager {
     @Getter
     private Map<Player, Double> playerFinishMAP = new HashMap<>();
 
-    public GameManager(MapManager mapManager) {
+    public GameManager(MapManager mapManager, ProfileManager profileManager) {
         this.mapManager = mapManager;
         this.gameZone = new GameZone(mapManager, this);
-        this.gameFinish = new GameFinish(mapManager, this);
+        this.gameFinish = new GameFinish(mapManager, this, profileManager);
         this.gameBuild = new GameBuild();
         this.defaultItems = new GameDefaultItems();
     }

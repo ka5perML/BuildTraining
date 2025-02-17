@@ -1,7 +1,8 @@
 package me.kasper;
 
 import lombok.SneakyThrows;
-import me.kasper.map.Platform;
+import me.kasper.profile.ProfileManager;
+import me.kasper.profile.command.RecordTimePlayerCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,15 +13,13 @@ import me.kasper.map.MapManager;
 import me.kasper.timer.TimerManager;
 import me.kasper.util.CFGPlatformLoader;
 
-import java.util.List;
-
 public final class BuildTraining extends JavaPlugin {
     private static BuildTraining instance;
     private CFGPlatformLoader loader;
     private MapManager mapManager;
     private GameManager gameManager;
     private TimerManager timerManager;
-    private List<Platform> platformList;
+    private ProfileManager profileManager;
 
     @SneakyThrows
     @Override
@@ -28,18 +27,19 @@ public final class BuildTraining extends JavaPlugin {
         instance = this;
         loader = new CFGPlatformLoader();
 
-        platformList = loader.loadPlatformCFG(BuildTraining.getInstance().getResource("cfgPlatform.json"));
-        mapManager = new MapManager(platformList);
-        gameManager = new GameManager(mapManager);
+        profileManager = new ProfileManager();
+        mapManager = new MapManager(loader.loadPlatformCFG(BuildTraining.getInstance().getResource("cfgPlatform.json")));
+        gameManager = new GameManager(mapManager, profileManager);
         timerManager = new TimerManager(mapManager, gameManager);
         mapManager.getWorldSetting().startWorldSetting();
 
         //Command
-        getCommand("finish").setExecutor(new CustomFinish(gameManager));
+        getCommand("finish").setExecutor(new CustomFinish(gameManager, profileManager));
+        getCommand("record").setExecutor(new RecordTimePlayerCommand(profileManager));
 
         //Listener
         registerListener(
-                new PlayerRegistnerListener(gameManager)
+                new PlayerRegistnerListener(gameManager, profileManager)
         );
 
         Bukkit.getLogger().info("[BuildTraining] Online");
